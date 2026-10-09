@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+import 'demo/db_demo_page.dart';
+import 'supabase_config.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(url: supabaseUrl, publishableKey: supabasePublishableKey);
   runApp(const MyApp());
 }
+
+SupabaseClient get supabase => Supabase.instance.client;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -11,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'MyTrainer',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -30,7 +38,8 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // Temporary: DB demo screen until the real UI exists.
+      home: const DbDemoPage(),
     );
   }
 }
